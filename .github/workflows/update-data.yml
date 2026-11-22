@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "30 20 1 * *"   # 02:00 IST on the 2nd of every month
   workflow_dispatch:
+  push:                     # also runs when .github/refresh-request is edited (lets Claude ask for a refresh)
+    branches: [main]
+    paths: [".github/refresh-request"]
 
 permissions:
   contents: write
