@@ -1,0 +1,75 @@
+name: Monthly data refresh
+
+# Re-crawls every housing project in Kolkata and Delhi from Magicbricks, refetches buildings and nearby
+# places from OpenStreetMap, rebuilds the site data, commits it and redeploys the site.
+on:
+  schedule:
+    - cron: "30 20 1 * *"   # 02:00 IST on the 2nd of every month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  crawl:
+    strategy:
+      fail-fast: false
+      matrix:
+        city: [kolkata, delhi]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Magicbricks project list
+        working-directory: pipeline
+        run: python3 mb_crawl.py list ${{ matrix.city }}
+      - name: Magicbricks project pages (about 1 hour per 3,000 projects)
+        working-directory: pipeline
+        run: python3 mb_crawl.py projects ${{ matrix.city }}
+      - name: OpenStreetMap buildings, areas and nearby places
+        working-directory: pipeline
+        run: python3 osm_fetch.py ${{ matrix.city }}
+      - name: Build site data
+        working-directory: pipeline
+        run: python3 build_city.py ${{ matrix.city }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data-${{ matrix.city }}
+          path: web/public/data/${{ matrix.city }}*
+          retention-days: 7
+
+  commit:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.push.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: new-data
+          pattern: data-*
+          merge-multiple: true
+      - name: Commit refreshed data
+        id: push
+        run: |
+          mkdir -p new-data && cp -v new-data/* web/public/data/ 2>/dev/null || echo "no new data (every crawl failed)"
+          python3 pipeline/write_cities.py
+          git config user.name "flat-finder bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data
+          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git commit -m "Monthly data refresh $(date -u +%Y-%m-%d)"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: commit
+    if: needs.commit.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml

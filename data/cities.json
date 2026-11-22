@@ -1,0 +1,47 @@
+{
+ "kolkata": {
+  "name": "Kolkata",
+  "magicbricks": "kolkata",
+  "bbox": [
+   22.38,
+   88.22,
+   22.78,
+   88.56
+  ],
+  "center": [
+   88.4,
+   22.56
+  ],
+  "zoom": 11.4
+ },
+ "delhi": {
+  "name": "Delhi",
+  "magicbricks": "new-delhi",
+  "bbox": [
+   28.4,
+   76.84,
+   28.88,
+   77.35
+  ],
+  "center": [
+   77.17,
+   28.62
+  ],
+  "zoom": 10.8
+ },
+ "gurgaon": {
+  "name": "Gurugram",
+  "magicbricks": "gurgaon",
+  "bbox": [
+   28.33,
+   76.88,
+   28.55,
+   77.16
+  ],
+  "center": [
+   77.065,
+   28.425
+  ],
+  "zoom": 12.4
+ }
+}

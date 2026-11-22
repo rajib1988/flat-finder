@@ -1,0 +1,1730 @@
+{
+ "updated": "2026-11-22",
+ "sources": [
+  "Magicbricks Rental Index Apr–Jun 2026 (via Realty Today)",
+  "Square Yards locality rates, Mar 2026",
+  "Housing.com price trends",
+  "NoBroker Delhi property rates 2026",
+  "RealtyHunting 2026 guides",
+  "Bajaj Finserv Kolkata rates",
+  "HomeBazaar Kolkata"
+ ],
+ "note": "Rents in ₹ thousand per month [low, high] by BHK; p = sale ₹/sq ft [low, high]. Asking ranges for typical unfurnished/semi-furnished flats.",
+ "localities": [
+  {
+   "city": "kolkata",
+   "name": "Salt Lake (Bidhannagar)",
+   "zone": "East",
+   "lat": 22.585,
+   "lng": 88.412,
+   "types": [
+    "apt",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     10,
+     15
+    ],
+    "2": [
+     15,
+     28
+    ],
+    "3": [
+     25,
+     45
+    ],
+    "4": [
+     40,
+     70
+    ]
+   },
+   "psf": [
+    8400,
+    16200
+   ],
+   "metro": "Green Line: Karunamoyee, Central Park, City Centre, Bengal Chemical, Salt Lake Stadium",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it",
+    "green"
+   ],
+   "pros": "Planned blocks, wide roads and parks; 10–15 min to Sector V IT hub.",
+   "cons": "Little new supply, mostly older houses and low-rise floors; some blocks waterlog in heavy rain.",
+   "societies": [
+    "Independent floors in CA, CD, BD, FD, AE blocks",
+    "Labony Estate",
+    "GM Meena Orchid"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "New Town (Action Areas I–III)",
+   "zone": "North-east",
+   "lat": 22.585,
+   "lng": 88.47,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "1": [
+     10,
+     16
+    ],
+    "2": [
+     16,
+     28
+    ],
+    "3": [
+     25,
+     45
+    ],
+    "4": [
+     40,
+     65
+    ]
+   },
+   "psf": [
+    6500,
+    9500
+   ],
+   "metro": "Green Line Sector V nearby; Orange Line stations to the airport under construction (target Dec 2026)",
+   "metro_status": "uc",
+   "good_for": [
+    "family",
+    "it",
+    "green"
+   ],
+   "pros": "Newest gated societies with pools and clubs; Eco Park, Tata Medical Center, planned roads.",
+   "cons": "Patchy public transport until the Orange Line opens; fewer old-city markets; low-lying pockets flood.",
+   "societies": [
+    "DLF New Town Heights (Action Area III)",
+    "Ideal Aquaview (Action Area I)",
+    "Uniworld City",
+    "Rosedale Garden",
+    "Sukhobrishti (affordable)",
+    "Tata Eden Court"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Rajarhat & Chinar Park",
+   "zone": "North-east",
+   "lat": 22.62,
+   "lng": 88.445,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     8,
+     12
+    ],
+    "2": [
+     12,
+     20
+    ],
+    "3": [
+     18,
+     30
+    ]
+   },
+   "psf": [
+    4500,
+    7900
+   ],
+   "metro": "Orange Line Chinar Park & VIP Road stations under construction",
+   "metro_status": "uc",
+   "good_for": [
+    "budget",
+    "it"
+   ],
+   "pros": "Cheaper than New Town; close to the airport and City Centre 2.",
+   "cons": "Older Rajarhat belt has weaker roads and drainage; VIP Road traffic.",
+   "societies": [
+    "Siddha Town",
+    "One Rajarhat"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Baguiati & Kestopur",
+   "zone": "North-east",
+   "lat": 22.612,
+   "lng": 88.426,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     6,
+     10
+    ],
+    "2": [
+     10,
+     16
+    ],
+    "3": [
+     15,
+     24
+    ]
+   },
+   "psf": [
+    4000,
+    6000
+   ],
+   "metro": "Orange Line along VIP Road under construction; Yellow Line Jai Hind (Airport) about 3 km",
+   "metro_status": "uc",
+   "good_for": [
+    "budget",
+    "students"
+   ],
+   "pros": "Among the cheapest rents with quick reach to Salt Lake and New Town.",
+   "cons": "Narrow lanes, congestion, older buildings.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Lake Town & Bangur",
+   "zone": "North",
+   "lat": 22.604,
+   "lng": 88.399,
+   "types": [
+    "apt",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     8,
+     12
+    ],
+    "2": [
+     13,
+     22
+    ],
+    "3": [
+     20,
+     32
+    ]
+   },
+   "psf": [
+    5500,
+    8000
+   ],
+   "metro": "Dum Dum (Blue Line) and Dum Dum Cantonment (Yellow Line) 2–3 km",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "Established and lively, with big markets and the lake; close to Salt Lake.",
+   "cons": "Dense; heavy traffic on Jessore Road.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Dum Dum",
+   "zone": "North",
+   "lat": 22.628,
+   "lng": 88.404,
+   "types": [
+    "apt",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     6,
+     10
+    ],
+    "2": [
+     10,
+     16
+    ],
+    "3": [
+     15,
+     22
+    ]
+   },
+   "psf": [
+    3500,
+    5500
+   ],
+   "metro": "Blue Line Dum Dum; Yellow Line Dum Dum Cantonment, Jessore Road",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "students"
+   ],
+   "pros": "Metro plus suburban rail; airport 15–20 min.",
+   "cons": "Older housing stock, crowded.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Kankurgachi & Phoolbagan",
+   "zone": "Central-east",
+   "lat": 22.577,
+   "lng": 88.392,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     9,
+     14
+    ],
+    "2": [
+     15,
+     25
+    ],
+    "3": [
+     22,
+     35
+    ]
+   },
+   "psf": [
+    6000,
+    9000
+   ],
+   "metro": "Green Line Phoolbagan; Orange Line Beleghata nearby",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Central-east; 15 min to Sector V and Sealdah.",
+   "cons": "Busy roads, little greenery.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Central (Park Street, Elgin, Camac St)",
+   "zone": "Central",
+   "lat": 22.548,
+   "lng": 88.356,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     18,
+     30
+    ],
+    "2": [
+     30,
+     60
+    ],
+    "3": [
+     50,
+     100
+    ],
+    "4": [
+     90,
+     180
+    ]
+   },
+   "psf": [
+    12000,
+    22000
+   ],
+   "metro": "Blue Line Park Street, Maidan, Esplanade; Green Line Esplanade",
+   "metro_status": "yes",
+   "good_for": [
+    "food",
+    "family"
+   ],
+   "pros": "Heart of the city: restaurants, hospitals, top schools and offices.",
+   "cons": "Expensive, older buildings, little parking.",
+   "societies": [
+    "The 42 (Chowringhee, luxury)"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Ballygunge & Gariahat",
+   "zone": "South",
+   "lat": 22.526,
+   "lng": 88.367,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     15,
+     25
+    ],
+    "2": [
+     30,
+     50
+    ],
+    "3": [
+     50,
+     90
+    ],
+    "4": [
+     80,
+     150
+    ]
+   },
+   "psf": [
+    10000,
+    18000
+   ],
+   "metro": "Blue Line Kalighat / Rabindra Sarobar about 1.5 km; Ballygunge suburban rail",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "food",
+    "green"
+   ],
+   "pros": "Premium old-Kolkata address; Gariahat market, lakes, schools.",
+   "cons": "High rents; many older buildings with few amenities.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Lake Gardens & Dhakuria",
+   "zone": "South",
+   "lat": 22.509,
+   "lng": 88.358,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     9,
+     14
+    ],
+    "2": [
+     15,
+     25
+    ],
+    "3": [
+     22,
+     38
+    ]
+   },
+   "psf": [
+    6500,
+    9500
+   ],
+   "metro": "Suburban rail Lake Gardens & Dhakuria; Blue Line Rabindra Sarobar about 1.5 km",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "green"
+   ],
+   "pros": "Next to Rabindra Sarobar lake; quiet and residential.",
+   "cons": "Traffic at rail crossings.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Jodhpur Park & Prince Anwar Shah Rd",
+   "zone": "South",
+   "lat": 22.499,
+   "lng": 88.364,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "2": [
+     20,
+     35
+    ],
+    "3": [
+     30,
+     55
+    ],
+    "4": [
+     50,
+     90
+    ]
+   },
+   "psf": [
+    9000,
+    14000
+   ],
+   "metro": "Blue Line Tollygunge / Netaji about 2 km; Lake Gardens rail about 1 km",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "South City township with mall, school and club; established neighbourhood.",
+   "cons": "Prince Anwar Shah Road traffic.",
+   "societies": [
+    "South City"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Tollygunge",
+   "zone": "South",
+   "lat": 22.494,
+   "lng": 88.347,
+   "types": [
+    "apt",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     8,
+     14
+    ],
+    "2": [
+     14,
+     25
+    ],
+    "3": [
+     22,
+     40
+    ]
+   },
+   "psf": [
+    6500,
+    9500
+   ],
+   "metro": "Blue Line Mahanayak Uttam Kumar (Tollygunge), Netaji, Masterda Surya Sen",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "budget"
+   ],
+   "pros": "Metro on the doorstep; Tollygunge Club; good markets.",
+   "cons": "Older buildings, narrow roads.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "New Alipore & Alipore",
+   "zone": "South",
+   "lat": 22.51,
+   "lng": 88.332,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "2": [
+     22,
+     40
+    ],
+    "3": [
+     35,
+     70
+    ],
+    "4": [
+     60,
+     120
+    ]
+   },
+   "psf": [
+    9000,
+    16000
+   ],
+   "metro": "Purple Line Majerhat / Taratala about 1.5 km; Blue Line Jatin Das Park about 2.5 km",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "green"
+   ],
+   "pros": "Leafy and upscale, top schools, quick to Park Street.",
+   "cons": "Expensive; traffic around Majerhat bridge.",
+   "societies": [
+    "PS Vyom"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Behala",
+   "zone": "South-west",
+   "lat": 22.494,
+   "lng": 88.311,
+   "types": [
+    "apt",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     6,
+     10
+    ],
+    "2": [
+     10,
+     17
+    ],
+    "3": [
+     15,
+     25
+    ]
+   },
+   "psf": [
+    3500,
+    5500
+   ],
+   "metro": "Purple Line: Behala Chowrasta, Behala Bazar, Taratala, Sakher Bazar",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "family"
+   ],
+   "pros": "Affordable, Purple Line metro, lots of new mid-rise flats.",
+   "cons": "Diamond Harbour Road congestion; some waterlogging.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "EM Bypass (Kasba to Mukundapur)",
+   "zone": "South-east",
+   "lat": 22.5,
+   "lng": 88.399,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "1": [
+     10,
+     15
+    ],
+    "2": [
+     18,
+     30
+    ],
+    "3": [
+     25,
+     50
+    ],
+    "4": [
+     45,
+     90
+    ]
+   },
+   "psf": [
+    5500,
+    11500
+   ],
+   "metro": "Orange Line: Satyajit Ray, Jyotirindra Nandi, Kavi Sukanta, Hemanta Mukhopadhyay (Ruby), VIP Bazar, Ritwik Ghatak, Barun Sengupta",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Big gated complexes, the hospital belt and the Orange Line; about 25 min to Sector V.",
+   "cons": "Bypass traffic; wetland-edge waterlogging.",
+   "societies": [
+    "Urbana (Anandapur)",
+    "Ambuja Utalika (Mukundapur)",
+    "Bengal Peerless Avidipta",
+    "Upohar (Chak Garia)",
+    "Hiland Park",
+    "Ambient Winds (Kalikapur)"
+   ]
+  },
+  {
+   "city": "kolkata",
+   "name": "Jadavpur & Santoshpur",
+   "zone": "South",
+   "lat": 22.493,
+   "lng": 88.375,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     8,
+     12
+    ],
+    "2": [
+     12,
+     20
+    ],
+    "3": [
+     18,
+     30
+    ]
+   },
+   "psf": [
+    5000,
+    8000
+   ],
+   "metro": "Suburban rail Jadavpur; Orange Line Kavi Sukanta / Satyajit Ray 1.5–2 km",
+   "metro_status": "near",
+   "good_for": [
+    "students",
+    "budget"
+   ],
+   "pros": "University buzz, cheap eats, good bus links.",
+   "cons": "Crowded around 8B.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Garia & Patuli",
+   "zone": "South",
+   "lat": 22.466,
+   "lng": 88.392,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     7,
+     10
+    ],
+    "2": [
+     10,
+     15
+    ],
+    "3": [
+     15,
+     22
+    ]
+   },
+   "psf": [
+    3500,
+    5500
+   ],
+   "metro": "Blue Line Kavi Nazrul, Shahid Khudiram; Orange Line Satyajit Ray on the Patuli side",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "students"
+   ],
+   "pros": "Affordable and metro-linked; Patuli lake.",
+   "cons": "45–60 min to Sector V.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Narendrapur & Sonarpur",
+   "zone": "Far south",
+   "lat": 22.437,
+   "lng": 88.398,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "2": [
+     9,
+     14
+    ],
+    "3": [
+     13,
+     20
+    ]
+   },
+   "psf": [
+    3300,
+    5500
+   ],
+   "metro": "Suburban rail Narendrapur / Sonarpur; Kavi Subhash metro about 4 km (station being rebuilt)",
+   "metro_status": "none",
+   "good_for": [
+    "budget",
+    "green"
+   ],
+   "pros": "New gated projects at low prices; Ramakrishna Mission campus.",
+   "cons": "Long commute to the centre.",
+   "societies": []
+  },
+  {
+   "city": "kolkata",
+   "name": "Joka",
+   "zone": "Far south-west",
+   "lat": 22.452,
+   "lng": 88.305,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "2": [
+     10,
+     15
+    ],
+    "3": [
+     14,
+     22
+    ]
+   },
+   "psf": [
+    4500,
+    6000
+   ],
+   "metro": "Purple Line Joka",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "green"
+   ],
+   "pros": "IIM Calcutta, open land, new townships at low prices.",
+   "cons": "Far out; limited social infrastructure so far.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Greater Kailash I & II",
+   "zone": "South",
+   "lat": 28.543,
+   "lng": 77.236,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "2": [
+     50,
+     80
+    ],
+    "3": [
+     100,
+     170
+    ],
+    "4": [
+     150,
+     300
+    ]
+   },
+   "psf": [
+    25000,
+    45000
+   ],
+   "metro": "Magenta Line Greater Kailash, Chirag Delhi; Violet Line Kailash Colony",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "Premium South Delhi; M-Block and N-Block markets, parks. Avg rent Apr–Jun 2026: 2 BHK ₹66.5k, 3 BHK ₹1.36 lakh.",
+   "cons": "Very expensive; mostly builder floors; parking is tight.",
+   "societies": [
+    "Builder floors in M, N, S, W blocks (GK I)",
+    "E and M blocks (GK II)"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Kalkaji & Govindpuri",
+   "zone": "South",
+   "lat": 28.538,
+   "lng": 77.258,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     12,
+     20
+    ],
+    "2": [
+     35,
+     50
+    ],
+    "3": [
+     65,
+     100
+    ]
+   },
+   "psf": [
+    15000,
+    25000
+   ],
+   "metro": "Kalkaji Mandir (Violet + Magenta), Govindpuri (Violet)",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Next to Nehru Place offices, two metro lines. Avg rent: 2 BHK ₹43.2k, 3 BHK ₹85.8k.",
+   "cons": "Congested along Outer Ring Road.",
+   "societies": [
+    "Kalkaji DDA flats",
+    "Kalkaji Extension"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Vasant Kunj",
+   "zone": "South-west",
+   "lat": 28.524,
+   "lng": 77.158,
+   "types": [
+    "dda",
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     18,
+     28
+    ],
+    "2": [
+     38,
+     55
+    ],
+    "3": [
+     60,
+     90
+    ],
+    "4": [
+     90,
+     140
+    ]
+   },
+   "psf": [
+    17000,
+    24000
+   ],
+   "metro": "Yellow Line Chhattarpur 2–3 km; Golden Line (Aerocity–Tughlakabad) stations under construction",
+   "metro_status": "uc",
+   "good_for": [
+    "family",
+    "green",
+    "it"
+   ],
+   "pros": "Green DDA pockets, malls, 15 min to the airport and Gurugram. Avg rent: 2 BHK ₹47.8k, 3 BHK ₹76.6k.",
+   "cons": "Weak metro access until the Golden Line opens.",
+   "societies": [
+    "DDA pockets in Sectors A–D",
+    "DDA Santushti Apartments",
+    "Vasant Kunj Enclave"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Vasant Vihar",
+   "zone": "South-west",
+   "lat": 28.56,
+   "lng": 77.16,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "3": [
+     85,
+     200
+    ],
+    "4": [
+     150,
+     350
+    ]
+   },
+   "psf": [
+    35000,
+    60000
+   ],
+   "metro": "Magenta Line Vasant Vihar",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "green"
+   ],
+   "pros": "Embassy belt; very green and quiet.",
+   "cons": "Among the costliest in Delhi.",
+   "societies": [
+    "Vasant Enclave",
+    "Hills View Apartments",
+    "Munirka DDA flats (cheaper, next door)"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Saket",
+   "zone": "South",
+   "lat": 28.522,
+   "lng": 77.212,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     22
+    ],
+    "2": [
+     25,
+     40
+    ],
+    "3": [
+     50,
+     75
+    ]
+   },
+   "psf": [
+    16000,
+    19000
+   ],
+   "metro": "Yellow Line Saket",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "Select Citywalk, Max hospital, metro. Avg rent: 2 BHK ₹29.6k, 3 BHK ₹61.9k.",
+   "cons": "Some builder floors are cramped.",
+   "societies": [
+    "Golf View Apartments",
+    "Press Enclave DDA flats"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Malviya Nagar",
+   "zone": "South",
+   "lat": 28.534,
+   "lng": 77.207,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     22
+    ],
+    "2": [
+     35,
+     50
+    ],
+    "3": [
+     55,
+     80
+    ]
+   },
+   "psf": [
+    15000,
+    22000
+   ],
+   "metro": "Yellow Line Malviya Nagar",
+   "metro_status": "yes",
+   "good_for": [
+    "food",
+    "students",
+    "family"
+   ],
+   "pros": "Lively market and cafes, next to Saket. Avg rent: 2 BHK ₹43.7k, 3 BHK ₹69k.",
+   "cons": "Dense, narrow lanes.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Hauz Khas & Green Park",
+   "zone": "South",
+   "lat": 28.553,
+   "lng": 77.203,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     20,
+     35
+    ],
+    "2": [
+     45,
+     75
+    ],
+    "3": [
+     80,
+     150
+    ]
+   },
+   "psf": [
+    28000,
+    40000
+   ],
+   "metro": "Hauz Khas (Yellow + Magenta), Green Park (Yellow)",
+   "metro_status": "yes",
+   "good_for": [
+    "food",
+    "green",
+    "family"
+   ],
+   "pros": "Deer Park, Hauz Khas Village; AIIMS and IIT close by.",
+   "cons": "Expensive.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Lajpat Nagar",
+   "zone": "South",
+   "lat": 28.568,
+   "lng": 77.243,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     22
+    ],
+    "2": [
+     30,
+     45
+    ],
+    "3": [
+     50,
+     80
+    ]
+   },
+   "psf": [
+    18000,
+    28000
+   ],
+   "metro": "Lajpat Nagar (Violet + Pink)",
+   "metro_status": "yes",
+   "good_for": [
+    "food",
+    "family"
+   ],
+   "pros": "Central Market, interchange station, central location.",
+   "cons": "Crowded, heavy traffic.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Defence Colony",
+   "zone": "South",
+   "lat": 28.574,
+   "lng": 77.231,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "2": [
+     60,
+     90
+    ],
+    "3": [
+     100,
+     180
+    ]
+   },
+   "psf": [
+    35000,
+    55000
+   ],
+   "metro": "Violet Line Lajpat Nagar / JLN Stadium about 1.5 km",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "Upscale, central, Defence Colony market.",
+   "cons": "Expensive; few apartment blocks.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Moti Nagar & Kirti Nagar",
+   "zone": "West",
+   "lat": 28.658,
+   "lng": 77.145,
+   "types": [
+    "apt",
+    "gated"
+   ],
+   "rent": {
+    "2": [
+     30,
+     50
+    ],
+    "3": [
+     50,
+     90
+    ],
+    "4": [
+     90,
+     150
+    ]
+   },
+   "psf": [
+    18000,
+    30000
+   ],
+   "metro": "Blue Line Moti Nagar, Kirti Nagar; Green Line Kirti Nagar",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Rare large gated societies inside Delhi.",
+   "cons": "Industrial pockets nearby.",
+   "societies": [
+    "DLF Capital Greens",
+    "DLF One Midtown"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Rajouri Garden & Punjabi Bagh",
+   "zone": "West",
+   "lat": 28.648,
+   "lng": 77.124,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     22
+    ],
+    "2": [
+     30,
+     45
+    ],
+    "3": [
+     50,
+     80
+    ]
+   },
+   "psf": [
+    18000,
+    28000
+   ],
+   "metro": "Rajouri Garden (Blue + Pink), Punjabi Bagh (Green + Pink)",
+   "metro_status": "yes",
+   "good_for": [
+    "food",
+    "family"
+   ],
+   "pros": "Malls and food streets; well connected.",
+   "cons": "Ring Road traffic.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Paschim Vihar",
+   "zone": "West",
+   "lat": 28.668,
+   "lng": 77.1,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "2": [
+     22,
+     32
+    ],
+    "3": [
+     38,
+     55
+    ]
+   },
+   "psf": [
+    13000,
+    18000
+   ],
+   "metro": "Green Line Paschim Vihar East/West, Peeragarhi (Magenta interchange coming)",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "green"
+   ],
+   "pros": "District park, DDA societies, calm. Avg rent: 2 BHK ₹27.3k, 3 BHK ₹46.1k.",
+   "cons": "Far from South Delhi.",
+   "societies": [
+    "DDA SFS and group housing societies",
+    "J K Apartment"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Janakpuri",
+   "zone": "West",
+   "lat": 28.622,
+   "lng": 77.086,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     12,
+     18
+    ],
+    "2": [
+     22,
+     35
+    ],
+    "3": [
+     35,
+     55
+    ]
+   },
+   "psf": [
+    13000,
+    20000
+   ],
+   "metro": "Blue Line Janakpuri East/West; Magenta Line Janakpuri West",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "District Centre and hospitals; airport 20 min.",
+   "cons": "Older DDA stock.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Dwarka (Sectors 3–23)",
+   "zone": "South-west",
+   "lat": 28.585,
+   "lng": 77.045,
+   "types": [
+    "dda",
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     12,
+     18
+    ],
+    "2": [
+     20,
+     32
+    ],
+    "3": [
+     30,
+     48
+    ],
+    "4": [
+     45,
+     70
+    ]
+   },
+   "psf": [
+    11000,
+    16000
+   ],
+   "metro": "Blue Line Dwarka Sec 8–21; Airport Express Dwarka Sec 21",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "green",
+    "it"
+   ],
+   "pros": "Planned sub-city of CGHS societies, wide roads, close to the airport and Gurugram.",
+   "cons": "Far from central and east Delhi; groundwater issues in some sectors.",
+   "societies": [
+    "CGHS group housing societies, Sectors 3–23",
+    "DDA SFS flats"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Uttam Nagar",
+   "zone": "West",
+   "lat": 28.621,
+   "lng": 77.06,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     7,
+     11
+    ],
+    "2": [
+     10,
+     16
+    ],
+    "3": [
+     15,
+     22
+    ]
+   },
+   "psf": [
+    5000,
+    8000
+   ],
+   "metro": "Blue Line Uttam Nagar East/West, Nawada",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "students"
+   ],
+   "pros": "Cheapest metro-linked area in west Delhi.",
+   "cons": "Unauthorised colonies, congestion.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Rohini",
+   "zone": "North-west",
+   "lat": 28.716,
+   "lng": 77.113,
+   "types": [
+    "dda",
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     10,
+     15
+    ],
+    "2": [
+     15,
+     25
+    ],
+    "3": [
+     25,
+     38
+    ]
+   },
+   "psf": [
+    10000,
+    15500
+   ],
+   "metro": "Red Line Rohini East/West, Rithala; Yellow Line Rohini Sector 18-19",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "budget"
+   ],
+   "pros": "Huge planned sub-city of CGHS and DDA flats; good value.",
+   "cons": "Far north-west; long commutes south.",
+   "societies": [
+    "CGHS societies in Sectors 9, 13, 24 and others"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Pitampura",
+   "zone": "North-west",
+   "lat": 28.699,
+   "lng": 77.136,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "2": [
+     20,
+     32
+    ],
+    "3": [
+     32,
+     50
+    ]
+   },
+   "psf": [
+    14000,
+    20000
+   ],
+   "metro": "Red Line Pitampura, Kohat Enclave; Magenta Line extension to Majlis Park (opened Mar 2026)",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "food"
+   ],
+   "pros": "Netaji Subhash Place; settled family area.",
+   "cons": "Far from South Delhi.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Ashok Vihar & Shalimar Bagh",
+   "zone": "North-west",
+   "lat": 28.69,
+   "lng": 77.172,
+   "types": [
+    "dda",
+    "floor"
+   ],
+   "rent": {
+    "2": [
+     25,
+     38
+    ],
+    "3": [
+     40,
+     60
+    ]
+   },
+   "psf": [
+    15000,
+    25000
+   ],
+   "metro": "Pink Line Shalimar Bagh, Azadpur; Yellow Line Azadpur",
+   "metro_status": "near",
+   "good_for": [
+    "family",
+    "green"
+   ],
+   "pros": "Spacious DDA pockets and parks.",
+   "cons": "Ring Road traffic.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Model Town & North Campus",
+   "zone": "North",
+   "lat": 28.7,
+   "lng": 77.2,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     25
+    ],
+    "2": [
+     25,
+     40
+    ],
+    "3": [
+     40,
+     60
+    ]
+   },
+   "psf": [
+    15000,
+    25000
+   ],
+   "metro": "Yellow Line Model Town, GTB Nagar, Vishwavidyalaya",
+   "metro_status": "yes",
+   "good_for": [
+    "students",
+    "food"
+   ],
+   "pros": "Delhi University, PGs, Kamla Nagar market.",
+   "cons": "Student-heavy and noisy.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Karol Bagh & Rajinder Nagar",
+   "zone": "Central",
+   "lat": 28.645,
+   "lng": 77.188,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     15,
+     25
+    ],
+    "2": [
+     25,
+     40
+    ],
+    "3": [
+     40,
+     60
+    ]
+   },
+   "psf": [
+    18000,
+    20000
+   ],
+   "metro": "Blue Line Karol Bagh, Rajendra Place",
+   "metro_status": "yes",
+   "good_for": [
+    "students",
+    "food"
+   ],
+   "pros": "Central, 10 min to Connaught Place; coaching hub.",
+   "cons": "Very crowded; monsoon waterlogging.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Mayur Vihar Phase 1",
+   "zone": "East",
+   "lat": 28.609,
+   "lng": 77.293,
+   "types": [
+    "dda",
+    "apt"
+   ],
+   "rent": {
+    "1": [
+     12,
+     18
+    ],
+    "2": [
+     22,
+     32
+    ],
+    "3": [
+     35,
+     50
+    ]
+   },
+   "psf": [
+    10000,
+    15000
+   ],
+   "metro": "Mayur Vihar-1 (Blue + Pink)",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Close to Noida and CP; interchange station; DDA societies. Avg rent: 2 BHK ₹28.1k, 3 BHK ₹42.6k.",
+   "cons": "Yamuna-side waterlogging; NH-24 traffic.",
+   "societies": [
+    "Nextra The Address",
+    "Vasant Apartment",
+    "Samachar Apartments"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "IP Extension & Patparganj",
+   "zone": "East",
+   "lat": 28.63,
+   "lng": 77.306,
+   "types": [
+    "apt"
+   ],
+   "rent": {
+    "2": [
+     20,
+     30
+    ],
+    "3": [
+     30,
+     45
+    ],
+    "4": [
+     45,
+     65
+    ]
+   },
+   "psf": [
+    10000,
+    14000
+   ],
+   "metro": "Pink Line IP Extension; Blue Line Nirman Vihar about 2 km",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "budget"
+   ],
+   "pros": "Dozens of CGHS societies with parks; quick to Noida.",
+   "cons": "Older buildings.",
+   "societies": [
+    "CGHS societies along IP Extension"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Laxmi Nagar & Preet Vihar",
+   "zone": "East",
+   "lat": 28.633,
+   "lng": 77.278,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     10,
+     15
+    ],
+    "2": [
+     15,
+     25
+    ],
+    "3": [
+     25,
+     35
+    ]
+   },
+   "psf": [
+    9000,
+    14000
+   ],
+   "metro": "Blue Line Laxmi Nagar, Nirman Vihar, Preet Vihar",
+   "metro_status": "yes",
+   "good_for": [
+    "budget",
+    "students"
+   ],
+   "pros": "Cheap; coaching hub; 15 min to CP.",
+   "cons": "Very dense.",
+   "societies": []
+  },
+  {
+   "city": "delhi",
+   "name": "Sarita Vihar & Jasola",
+   "zone": "South-east",
+   "lat": 28.53,
+   "lng": 77.29,
+   "types": [
+    "dda"
+   ],
+   "rent": {
+    "2": [
+     25,
+     38
+    ],
+    "3": [
+     40,
+     60
+    ]
+   },
+   "psf": [
+    12000,
+    18000
+   ],
+   "metro": "Violet Line Sarita Vihar, Jasola Apollo; Magenta Line Jasola Vihar",
+   "metro_status": "yes",
+   "good_for": [
+    "family",
+    "it"
+   ],
+   "pros": "Apollo Hospital; close to Noida and Okhla offices; DDA pockets.",
+   "cons": "Mathura Road traffic.",
+   "societies": [
+    "Sarita Vihar DDA pockets",
+    "Jasola Vihar DDA flats"
+   ]
+  },
+  {
+   "city": "delhi",
+   "name": "Chhattarpur",
+   "zone": "South",
+   "lat": 28.5,
+   "lng": 77.178,
+   "types": [
+    "floor"
+   ],
+   "rent": {
+    "1": [
+     9,
+     14
+    ],
+    "2": [
+     14,
+     22
+    ],
+    "3": [
+     22,
+     35
+    ]
+   },
+   "psf": [
+    6000,
+    10000
+   ],
+   "metro": "Yellow Line Chhattarpur",
+   "metro_status": "yes",
+   "good_for": [
+    "budget"
+   ],
+   "pros": "Budget South Delhi with metro; near Gurugram.",
+   "cons": "Unplanned lanes.",
+   "societies": []
+  }
+ ]
+}

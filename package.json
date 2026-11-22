@@ -1,0 +1,10 @@
+{
+  "name": "flatfinder",
+  "version": "0.1.0",
+  "description": "Find housing societies by the smallest bedroom you can live with. CLI for flat-finder.pages.dev",
+  "type": "module",
+  "bin": { "flatfinder": "cli/flatfinder.mjs" },
+  "files": ["cli", "web/src/filters.js"],
+  "license": "MIT",
+  "repository": "github:kairothq/flat-finder"
+}
