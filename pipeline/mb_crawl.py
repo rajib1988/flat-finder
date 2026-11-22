@@ -56,7 +56,7 @@ def crawl_list():
         print("slug", slug, "->", total, "projects" if total else ("no project count on page: " + (first or "no response")[:200].replace("\n", " ")), flush=True)
         if total:
             break
-    if not total:
+    if not total and not CFG.get("listing_city"):
         # discover the slug from links on a city page that is known to work
         word = CFG["name"].lower().split()[-1]
         found = set()
@@ -80,6 +80,14 @@ def crawl_list():
             print("discovered slug", slug, "->", total, flush=True)
             if total:
                 break
+    if not total and CFG.get("listing_city"):
+        projects = harvest_listings()
+        if not projects:
+            raise SystemExit("No projects found on listing pages for " + CITY)
+        OUT.mkdir(parents=True, exist_ok=True)
+        (OUT / "mb_index.json").write_text(json.dumps(list(projects.values()), indent=0))
+        print("collected", len(projects), "projects from listing pages")
+        return
     if not total and CFG.get("magicbricks_localities"):
         return crawl_localities()
     if not total:
@@ -118,17 +126,53 @@ def crawl_localities():
         else:
             print(f"locality {loc}: no list page", flush=True)
     if not projects:
-        for probe in ("https://www.magicbricks.com/flats-in-new-delhi-for-sale-pppfs", "https://www.magicbricks.com/property-for-sale-in-new-delhi-pppfs",
-                      "https://www.magicbricks.com/flats-in-dwarka-new-delhi-for-sale-pppfs"):
-            html = fetch(probe) or ""
-            keys = {k: html.count(k) for k in ('"psmName"', '"psmid"', '"prjname"', '"projectName"', '"projectId"', '"pdpUrl"', 'pdpid', '"societyName"', '"lmtDName"', '"prjId"', 'totalCount', '"latitude"', '"pmtLat"')}
-            print("LISTING", probe, "len", len(html), keys, flush=True)
-            i = html.find('"projectName"') if '"projectName"' in html else html.find("pdpid")
-            print("SNIP", html[max(0, i - 600):i + 900].replace("\n", " "), flush=True)
+        projects = harvest_listings()
+    if not projects:
         raise SystemExit("No locality project lists found for " + CITY)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "mb_index.json").write_text(json.dumps(list(projects.values()), indent=0))
     print("collected", len(projects), "projects from locality lists")
+
+
+CARD_LINK = re.compile(r'href="(https://www\.magicbricks\.com/([a-z0-9-]+)-pdpid-([0-9a-f]+))"[^>]*>\s*<span[^>]*>([^<]+)</span>')
+CARD_LOC = re.compile(r'title="[^"]*?for (?:Sale|Rent) in\s+([^"]+?),\s*New Delhi"')
+
+
+def harvest_listings():
+    """Delhi has no project list pages: collect project pages linked from flat-for-sale and flat-for-rent listings."""
+    city = CFG.get("listing_city", SLUGS[0])
+    projects = {}
+    bases = [f"flats-in-{city}-for-sale-pppfs", f"flats-for-rent-in-{city}-pppfr"]
+    for loc in CFG.get("magicbricks_localities", []):
+        bases += [f"flats-in-{loc}-{city}-for-sale-pppfs", f"flats-for-rent-in-{loc}-{city}-pppfr"]
+    for base in bases:
+        added_here = 0
+        for n in range(1, 61):
+            html = fetch(f"https://www.magicbricks.com/{base}" + (f"/page-{n}" if n > 1 else ""))
+            if not html:
+                break
+            new = 0
+            for chunk in html.split("mb-srp__card__info")[1:]:
+                m = CARD_LINK.search(chunk)
+                if not m:
+                    continue
+                url, slug, hexid, name = m.groups()
+                try:
+                    mb = bytes.fromhex(hexid).decode()
+                except ValueError:
+                    continue
+                pid = mb[2:] if mb.startswith("MB") else mb
+                if pid in projects:
+                    continue
+                lm = CARD_LOC.search(chunk)
+                projects[pid] = {"mb_id": pid, "name": name.strip(), "developer": None, "locality": lm.group(1).strip() if lm else None,
+                                 "url": url, "card_units": [], "images": [], "type_codes": []}
+                new += 1
+            added_here += new
+            if new == 0:
+                break
+        print(f"listings {base}: +{added_here} projects, {len(projects)} total", flush=True)
+    return projects
 
 
 def crawl_projects():

@@ -95,7 +95,11 @@ def parse_project_page(html):
     det = mob.get("detailBean") or {}
     lat, lng = _num(info.get("psmLatitude")), _num(info.get("psmLongitude"))
     amen = [a.get("amenityName") for a in (mob.get("amenitiesList") or []) if a.get("amenityName")]
+    extra = {k: v for k, v in {"developer": _find(state, r"^(devName|developerName|builderName)$"),
+                                "locality": _find(state, r"^(lmtDName|localityName|locName)$"),
+                                "possession": _find(state, r"^(prjPossYear|possessionYear|possessionDate|possDate)$")}.items() if v}
     return {
+        **extra,
         "lat": lat,
         "lng": lng,
         "rera_id": det.get("reraId"),
@@ -107,6 +111,23 @@ def parse_project_page(html):
         "configs": parse_configs(state),
         **parse_extras(html),
     }
+
+
+def _find(obj, pattern, depth=0):
+    """First non-empty scalar under a key matching pattern, searched breadth-first through nested state."""
+    rx = re.compile(pattern, re.I)
+    level = [obj]
+    for _ in range(6):
+        nxt = []
+        for o in level:
+            items = o.items() if isinstance(o, dict) else enumerate(o) if isinstance(o, list) else []
+            for k, v in items:
+                if isinstance(k, str) and rx.search(k) and isinstance(v, (str, int, float)) and str(v).strip() not in ("", "0", "null"):
+                    return v
+                if isinstance(v, (dict, list)):
+                    nxt.append(v)
+        level = nxt[:2000]
+    return None
 
 
 def parse_unit_info(raw):

@@ -39,7 +39,7 @@ jobs:
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         shell: bash
-        run: MB_LOC_LIMIT=${{ vars.MB_LOC_LIMIT || '999' }} python3 mb_crawl.py list ${{ matrix.city }} 2>&1 | tee ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+        run: python3 mb_crawl.py list ${{ matrix.city }} 2>&1 | tee ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
       - name: Magicbricks project pages (about 1 hour per 3,000 projects)
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
