@@ -27,7 +27,11 @@
    77.17,
    28.62
   ],
-  "zoom": 10.8
+  "zoom": 10.8,
+  "magicbricks_alt": [
+   "delhi",
+   "delhi-ncr"
+  ]
  },
  "gurgaon": {
   "name": "Gurugram",

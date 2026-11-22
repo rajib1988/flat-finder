@@ -25,22 +25,34 @@ jobs:
     timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
+      - name: Is this city requested?
+        id: want
+        # a push to .github/refresh-request may name cities on a line like "cities: delhi"; otherwise all run
+        run: |
+          req=$(grep -i '^cities:' .github/refresh-request 2>/dev/null | cut -d: -f2- || true)
+          if [ "${{ github.event_name }}" != "push" ] || [ -z "$req" ] || echo "$req" | grep -qw "${{ matrix.city }}"; then echo "run=true" >> "$GITHUB_OUTPUT"; else echo "run=false" >> "$GITHUB_OUTPUT"; echo "skipping ${{ matrix.city }}"; fi
       - uses: actions/setup-python@v5
+        if: steps.want.outputs.run == 'true'
         with:
           python-version: "3.12"
       - name: Magicbricks project list
+        if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 mb_crawl.py list ${{ matrix.city }}
       - name: Magicbricks project pages (about 1 hour per 3,000 projects)
+        if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 mb_crawl.py projects ${{ matrix.city }}
       - name: OpenStreetMap buildings, areas and nearby places
+        if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 osm_fetch.py ${{ matrix.city }}
       - name: Build site data
+        if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 build_city.py ${{ matrix.city }}
       - uses: actions/upload-artifact@v4
+        if: steps.want.outputs.run == 'true'
         with:
           name: data-${{ matrix.city }}
           path: web/public/data/${{ matrix.city }}*

@@ -20,7 +20,8 @@ OUT = ROOT / "out"
 CITIES = json.loads((ROOT.parent / "data" / "cities.json").read_text())
 CITY = next((a for a in sys.argv[1:] if a in CITIES), "gurgaon")
 CFG = CITIES[CITY]
-LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + CFG["magicbricks"] + "-nprid/page-{}"
+SLUGS = [CFG["magicbricks"]] + CFG.get("magicbricks_alt", [])
+LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + SLUGS[0] + "-nprid/page-{}"
 OUT = OUT / CITY
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 DELAY = 1.0
@@ -45,8 +46,17 @@ def fetch(url):
 
 
 def crawl_list():
-    first = fetch(LIST_URL.format(1))
-    total = mb_parse.parse_total(first)
+    global LIST_URL
+    total = None
+    for slug in SLUGS:  # the portal's city slug is not always the city name (Delhi: new-delhi or delhi)
+        LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + slug + "-nprid/page-{}"
+        first = fetch(LIST_URL.format(1))
+        total = mb_parse.parse_total(first) if first else None
+        print("slug", slug, "->", total, "projects" if total else ("no project count on page: " + (first or "no response")[:200].replace("\n", " ")), flush=True)
+        if total:
+            break
+    if not total:
+        raise SystemExit("Could not read the project list for " + CITY + " (tried " + ", ".join(SLUGS) + ")")
     pages = -(-total // 20)
     projects = {}
     for n in range(1, pages + 1):
