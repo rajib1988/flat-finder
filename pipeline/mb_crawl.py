@@ -71,6 +71,8 @@ def crawl_list():
             html = fetch(probe) or ""
             links = sorted(set(re.findall(r'(?:href=|"url":|")["\']?((?:https://www\.magicbricks\.com)?/[^"\'\s<>]*(?:nprid|projects?-|Delhi|delhi)[^"\'\s<>]*)', html)))
             print("PROBE", probe, "len", len(html), "links:", links[:120], flush=True)
+            if len(html) < 20000:
+                print("BODY", probe, html[:4200].replace("\n", " "), flush=True)
         for slug in cands:
             LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + slug + "-nprid/page-{}"
             first = fetch(LIST_URL.format(1))
