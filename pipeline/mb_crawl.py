@@ -80,6 +80,8 @@ def crawl_list():
             print("discovered slug", slug, "->", total, flush=True)
             if total:
                 break
+    if not total and CFG.get("magicbricks_localities"):
+        return crawl_localities()
     if not total:
         raise SystemExit("Could not read the project list for " + CITY + " (tried " + ", ".join(SLUGS) + ")")
     pages = -(-total // 20)
@@ -94,6 +96,32 @@ def crawl_list():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "mb_index.json").write_text(json.dumps(list(projects.values()), indent=0))
     print("total reported", total, "collected", len(projects))
+
+
+def crawl_localities():
+    """No city-wide list (Delhi): union the per-locality project lists, e.g. residential-projects-dwarka-in-new-delhi-nprid."""
+    projects = {}
+    for loc in CFG["magicbricks_localities"]:
+        for slug in SLUGS[:2]:
+            base = f"https://www.magicbricks.com/residential-projects-{loc}-in-{slug}-nprid"
+            first = fetch(base)
+            total = mb_parse.parse_total(first) if first else None
+            if not total:
+                continue
+            pages = -(-total // 20)
+            for n in range(1, pages + 1):
+                html = first if n == 1 else fetch(f"{base}/page-{n}")
+                for c in mb_parse.parse_list_page(html or ""):
+                    projects[c["psmid"]] = mb_parse.card_to_project(c)
+            print(f"locality {loc} ({slug}): {total} listed, {len(projects)} projects so far", flush=True)
+            break
+        else:
+            print(f"locality {loc}: no list page", flush=True)
+    if not projects:
+        raise SystemExit("No locality project lists found for " + CITY)
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "mb_index.json").write_text(json.dumps(list(projects.values()), indent=0))
+    print("collected", len(projects), "projects from locality lists")
 
 
 def crawl_projects():
