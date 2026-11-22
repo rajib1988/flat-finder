@@ -38,7 +38,8 @@ jobs:
       - name: Magicbricks project list
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
-        run: python3 mb_crawl.py list ${{ matrix.city }}
+        shell: bash
+        run: python3 mb_crawl.py list ${{ matrix.city }} 2>&1 | tee ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
       - name: Magicbricks project pages (about 1 hour per 3,000 projects)
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
@@ -51,6 +52,15 @@ jobs:
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 build_city.py ${{ matrix.city }}
+      - name: Save the error log to the debug branch
+        if: failure()
+        run: |
+          git config user.name "flat-finder bot"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp crawl-${{ matrix.city }}.log /tmp/ 2>/dev/null || echo "no log" > /tmp/crawl-${{ matrix.city }}.log
+          git fetch origin debug 2>/dev/null && git checkout debug 2>/dev/null || git checkout --orphan debug
+          git rm -rfq . 2>/dev/null || true
+          tail -c 20000 /tmp/crawl-${{ matrix.city }}.log > crawl-${{ matrix.city }}.log
+          git add crawl-${{ matrix.city }}.log && git commit -qm "crawl log ${{ matrix.city }}" && git push -f origin HEAD:debug-${{ matrix.city }}
       - uses: actions/upload-artifact@v4
         if: steps.want.outputs.run == 'true'
         with:
