@@ -55,22 +55,43 @@ jobs:
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 mb_crawl.py projects ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
-      - name: OpenStreetMap buildings, areas and nearby places
-        if: steps.want.outputs.run == 'true'
-        continue-on-error: true
-        timeout-minutes: 80
-        working-directory: pipeline
-        run: python3 osm_fetch.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
       - name: Save downloaded pages for reruns
         if: always() && steps.want.outputs.run == 'true'
         uses: actions/cache/save@v4
         with:
           path: pipeline/cache
           key: pages-${{ matrix.city }}-${{ steps.want.outputs.month }}-${{ github.run_id }}
-      - name: Build site data
+      - name: Build site data (without map extras)
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
         run: python3 build_city.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - uses: actions/upload-artifact@v4
+        if: steps.want.outputs.run == 'true'
+        with:
+          name: data-${{ matrix.city }}
+          path: web/public/data/${{ matrix.city }}*
+          retention-days: 7
+      # optional: nearby places, residential areas and building outlines from OpenStreetMap
+      - name: OpenStreetMap nearby places, areas and buildings
+        id: osm
+        if: steps.want.outputs.run == 'true'
+        continue-on-error: true
+        timeout-minutes: 60
+        working-directory: pipeline
+        run: python3 osm_fetch.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - name: Rebuild with map extras
+        if: always() && steps.want.outputs.run == 'true'
+        working-directory: pipeline
+        run: |
+          ls out/${{ matrix.city }}/ | tee -a ../crawl-${{ matrix.city }}.log
+          python3 build_city.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.want.outputs.run == 'true'
+        with:
+          name: data-${{ matrix.city }}
+          path: web/public/data/${{ matrix.city }}*
+          retention-days: 7
+          overwrite: true
       - name: Save the log to the debug branch
         if: always() && steps.want.outputs.run == 'true'
         run: |
@@ -78,12 +99,6 @@ jobs:
           { grep -v "^  retry" crawl-${{ matrix.city }}.log 2>/dev/null || echo "no log"; } | tail -c 60000 > /tmp/log.txt
           git checkout -q --orphan dbg && git rm -rfq --cached . && cp /tmp/log.txt crawl-${{ matrix.city }}.log
           git add crawl-${{ matrix.city }}.log && git commit -qm "crawl log ${{ matrix.city }} run ${{ github.run_id }}" && git push -qf origin HEAD:debug-${{ matrix.city }}
-      - uses: actions/upload-artifact@v4
-        if: steps.want.outputs.run == 'true'
-        with:
-          name: data-${{ matrix.city }}
-          path: web/public/data/${{ matrix.city }}*
-          retention-days: 7
 
   commit:
     needs: crawl

@@ -34,7 +34,7 @@ def overpass(query, name):
     for url in MIRRORS:
         try:
             req = urllib.request.Request(url, data=body, headers={"User-Agent": "flat-finder/0.1"})
-            raw = urllib.request.urlopen(req, timeout=200).read()
+            raw = urllib.request.urlopen(req, timeout=120).read()
             data = json.loads(raw)
             f.write_bytes(raw)
             return data
@@ -181,8 +181,7 @@ def fetch_pois():
 
 
 if __name__ == "__main__":
-    if "pois" in sys.argv:
-        fetch_pois()
-    else:
+    # nearby places first (most useful, one query), then residential areas, then building tiles (slowest)
+    fetch_pois()
+    if "pois" not in sys.argv:
         main()
-        fetch_pois()
