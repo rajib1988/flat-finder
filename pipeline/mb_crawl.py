@@ -101,7 +101,7 @@ def crawl_list():
 def crawl_localities():
     """No city-wide list (Delhi): union the per-locality project lists, e.g. residential-projects-dwarka-in-new-delhi-nprid."""
     projects = {}
-    for loc in CFG["magicbricks_localities"]:
+    for loc in CFG["magicbricks_localities"][: int(__import__("os").environ.get("MB_LOC_LIMIT", "999"))]:
         for slug in SLUGS[:2]:
             base = f"https://www.magicbricks.com/residential-projects-{loc}-in-{slug}-nprid"
             first = fetch(base)
@@ -118,6 +118,13 @@ def crawl_localities():
         else:
             print(f"locality {loc}: no list page", flush=True)
     if not projects:
+        for probe in ("https://www.magicbricks.com/flats-in-new-delhi-for-sale-pppfs", "https://www.magicbricks.com/property-for-sale-in-new-delhi-pppfs",
+                      "https://www.magicbricks.com/flats-in-dwarka-new-delhi-for-sale-pppfs"):
+            html = fetch(probe) or ""
+            keys = {k: html.count(k) for k in ('"psmName"', '"psmid"', '"prjname"', '"projectName"', '"projectId"', '"pdpUrl"', 'pdpid', '"societyName"', '"lmtDName"', '"prjId"', 'totalCount', '"latitude"', '"pmtLat"')}
+            print("LISTING", probe, "len", len(html), keys, flush=True)
+            i = html.find('"projectName"') if '"projectName"' in html else html.find("pdpid")
+            print("SNIP", html[max(0, i - 600):i + 900].replace("\n", " "), flush=True)
         raise SystemExit("No locality project lists found for " + CITY)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "mb_index.json").write_text(json.dumps(list(projects.values()), indent=0))
