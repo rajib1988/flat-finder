@@ -108,6 +108,8 @@ jobs:
       changed: ${{ steps.push.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main          # latest main, not the commit that started this run
       - uses: actions/download-artifact@v4
         with:
           path: new-data
@@ -116,6 +118,8 @@ jobs:
       - name: Commit refreshed data
         id: push
         run: |
+          set -euo pipefail
+          git pull --rebase origin main
           mkdir -p new-data
           # keep last month's files for a city if this run lost its map data (e.g. OpenStreetMap was down)
           python3 - <<'EOF'
@@ -142,7 +146,8 @@ jobs:
           git add web/public/data
           if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "Monthly data refresh $(date -u +%Y-%m-%d)"
-          git pull --rebase origin main && git push
+          for i in 1 2 3; do git push && break || { echo "push rejected, rebasing"; git pull --rebase origin main || { git checkout --theirs web/public/data/cities.json 2>/dev/null; python3 pipeline/write_cities.py; git add web/public/data/cities.json; GIT_EDITOR=true git rebase --continue; }; }; done
+          git fetch origin main && git diff --quiet HEAD origin/main
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
   deploy:
