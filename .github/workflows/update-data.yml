@@ -116,7 +116,26 @@ jobs:
       - name: Commit refreshed data
         id: push
         run: |
-          mkdir -p new-data && cp -v new-data/* web/public/data/ 2>/dev/null || echo "no new data (every crawl failed)"
+          mkdir -p new-data
+          # keep last month's files for a city if this run lost its map data (e.g. OpenStreetMap was down)
+          python3 - <<'EOF'
+          import json, pathlib, shutil
+          new, cur = pathlib.Path("new-data"), pathlib.Path("web/public/data")
+          for f in sorted(new.glob("*.json")):
+              if "-" in f.stem:
+                  continue
+              c = f.stem
+              osm = lambda p: sum(s.get("shape") == "osm" for s in json.loads(p.read_text())["societies"]) if p.exists() else 0
+              pois = lambda p: len(json.loads(p.read_text())) if p.exists() else 0
+              n_osm, o_osm = osm(f), osm(cur / f"{c}.json")
+              n_poi, o_poi = pois(new / f"{c}-pois.json"), pois(cur / f"{c}-pois.json")
+              if (o_osm and n_osm < 0.5 * o_osm) or (o_poi and n_poi < 0.5 * o_poi):
+                  print(f"{c}: new build has less map data (osm {n_osm} vs {o_osm}, places {n_poi} vs {o_poi}); keeping the current files")
+                  continue
+              for g in new.glob(f"{c}*"):
+                  shutil.copy(g, cur / g.name)
+              print(f"{c}: updated")
+          EOF
           python3 pipeline/write_cities.py
           git config user.name "flat-finder bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
