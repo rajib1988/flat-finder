@@ -7,6 +7,7 @@ usage: python mb_crawl.py list <city>      # all list pages -> out/<city>/mb_ind
 import gzip
 import hashlib
 import json
+import re
 import pathlib
 import sys
 import time
@@ -55,6 +56,23 @@ def crawl_list():
         print("slug", slug, "->", total, "projects" if total else ("no project count on page: " + (first or "no response")[:200].replace("\n", " ")), flush=True)
         if total:
             break
+    if not total:
+        # discover the slug from links on a city page that is known to work
+        word = CFG["name"].lower().split()[-1]
+        found = set()
+        for probe in ("https://www.magicbricks.com/residential-projects-in-kolkata-nprid/page-1", "https://www.magicbricks.com/"):
+            html = fetch(probe) or ""
+            found |= set(re.findall(r"residential-projects-in-([A-Za-z0-9-]+)-nprid", html))
+            found |= {m for m in re.findall(r"new-projects-([A-Za-z0-9-]+)", html)}
+        cands = sorted(c for c in found if word in c.lower() and c not in SLUGS)
+        print("slugs seen on other pages:", sorted(found)[:80], flush=True)
+        for slug in cands:
+            LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + slug + "-nprid/page-{}"
+            first = fetch(LIST_URL.format(1))
+            total = mb_parse.parse_total(first) if first else None
+            print("discovered slug", slug, "->", total, flush=True)
+            if total:
+                break
     if not total:
         raise SystemExit("Could not read the project list for " + CITY + " (tried " + ", ".join(SLUGS) + ")")
     pages = -(-total // 20)
