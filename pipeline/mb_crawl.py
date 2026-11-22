@@ -66,6 +66,11 @@ def crawl_list():
             found |= {m for m in re.findall(r"new-projects-([A-Za-z0-9-]+)", html)}
         cands = sorted(c for c in found if word in c.lower() and c not in SLUGS)
         print("slugs seen on other pages:", sorted(found)[:80], flush=True)
+        for probe in ("https://www.magicbricks.com/residential-projects-in-kolkata-nprid/page-1", "https://www.magicbricks.com/",
+                      "https://www.magicbricks.com/new-projects-New-Delhi", "https://www.magicbricks.com/new-projects-Delhi"):
+            html = fetch(probe) or ""
+            links = sorted(set(re.findall(r'(?:href=|"url":|")["\']?((?:https://www\.magicbricks\.com)?/[^"\'\s<>]*(?:nprid|projects?-|Delhi|delhi)[^"\'\s<>]*)', html)))
+            print("PROBE", probe, "len", len(html), "links:", links[:120], flush=True)
         for slug in cands:
             LIST_URL = "https://www.magicbricks.com/residential-projects-in-" + slug + "-nprid/page-{}"
             first = fetch(LIST_URL.format(1))
