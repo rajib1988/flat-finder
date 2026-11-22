@@ -21,6 +21,7 @@ MIRRORS = [
     "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
     "https://overpass-api.de/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
 ]
 
 
@@ -38,7 +39,7 @@ def overpass(query, name):
             f.write_bytes(raw)
             return data
         except Exception as e:
-            print("mirror failed", url, e, flush=True)
+            print("mirror failed", url, str(e)[:200], flush=True)
             time.sleep(10)
     raise SystemExit("all Overpass mirrors failed")
 
@@ -91,7 +92,11 @@ def height_of(tags):
 def main():
     s, w, n, e = BBOX
     bb = f"({s},{w},{n},{e})"
-    areas = overpass(f'[out:json][timeout:280];(way["landuse"="residential"]["name"]{bb};relation["landuse"="residential"]["name"]{bb};);out geom;', "areas")
+    try:
+        areas = overpass(f'[out:json][timeout:280];(way["landuse"="residential"]["name"]{bb};relation["landuse"="residential"]["name"]{bb};);out geom;', "areas")
+    except SystemExit:
+        print("residential areas failed on every mirror; continuing without them", flush=True)
+        areas = {"elements": []}
     feats = []
     for el in areas["elements"]:
         rings = ring_from_relation(el) if el["type"] == "relation" else [_pts(el["geometry"])]
@@ -109,7 +114,11 @@ def main():
         for j in range(nx):
             ts, tw = s + i * (n - s) / ny, w + j * (e - w) / nx
             tn, te = s + (i + 1) * (n - s) / ny, w + (j + 1) * (e - w) / nx
-            part = overpass(f'[out:json][timeout:280][maxsize:1073741824];way["building"]({ts:.4f},{tw:.4f},{tn:.4f},{te:.4f});out geom;', f"buildings_{i}_{j}")
+            try:
+                part = overpass(f'[out:json][timeout:280];way["building"]({ts:.4f},{tw:.4f},{tn:.4f},{te:.4f});out geom;', f"buildings_{i}_{j}")
+            except SystemExit:
+                print(f"building tile {i},{j} failed on every mirror; skipped", flush=True)
+                continue
             for el in part["elements"]:
                 if el["id"] not in seen:
                     seen.add(el["id"])
@@ -154,7 +163,11 @@ def poi_kind(t):
 
 def fetch_pois():
     s, w, n, e = BBOX
-    data = overpass(POI_QUERY.replace("{bb}", f"({s},{w},{n},{e})"), "pois")
+    try:
+        data = overpass(POI_QUERY.replace("{bb}", f"({s},{w},{n},{e})"), "pois")
+    except SystemExit:
+        print("nearby places failed on every mirror; continuing without them", flush=True)
+        data = {"elements": []}
     out = []
     for el in data["elements"]:
         c = el.get("center") or ({"lat": el["lat"], "lon": el["lon"]} if "lat" in el else None)

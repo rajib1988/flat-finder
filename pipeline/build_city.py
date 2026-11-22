@@ -272,9 +272,9 @@ def main(city="gurgaon"):
     located = [p for p in raw if p.get("lat") and p.get("lng") and bs - 0.1 < p["lat"] < bn + 0.1 and bw - 0.1 < p["lng"] < be + 0.1]
     not_located = len(raw) - len(located)
     projects = dedupe(located)
-    areas = json.loads((out / "osm_areas.geojson").read_text())["features"]
+    areas = json.loads((out / "osm_areas.geojson").read_text())["features"] if (out / "osm_areas.geojson").exists() else []
     area_grid = Grid(areas, lambda a: geo.centroid(a["geometry"]["coordinates"][0]))
-    blds = json.loads((out / "osm_buildings.geojson").read_text())["features"]
+    blds = json.loads((out / "osm_buildings.geojson").read_text())["features"] if (out / "osm_buildings.geojson").exists() else []
     for b in blds:
         b["_c"] = geo.centroid(b["geometry"]["coordinates"][0])
     bld_grid = Grid(blds, lambda b: b["_c"])

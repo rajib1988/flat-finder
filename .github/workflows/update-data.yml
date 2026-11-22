@@ -23,6 +23,9 @@ jobs:
         city: [kolkata, delhi]
     runs-on: ubuntu-latest
     timeout-minutes: 350
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - name: Is this city requested?
@@ -31,36 +34,49 @@ jobs:
         run: |
           req=$(grep -i '^cities:' .github/refresh-request 2>/dev/null | cut -d: -f2- || true)
           if [ "${{ github.event_name }}" != "push" ] || [ -z "$req" ] || echo "$req" | grep -qw "${{ matrix.city }}"; then echo "run=true" >> "$GITHUB_OUTPUT"; else echo "run=false" >> "$GITHUB_OUTPUT"; echo "skipping ${{ matrix.city }}"; fi
+          echo "month=$(date -u +%Y%m)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-python@v5
         if: steps.want.outputs.run == 'true'
         with:
           python-version: "3.12"
+      # pages downloaded this month are reused, so a rerun after a failure takes minutes, not hours
+      - name: Restore this month's downloaded pages
+        if: steps.want.outputs.run == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: pipeline/cache
+          key: pages-${{ matrix.city }}-${{ steps.want.outputs.month }}-${{ github.run_id }}
+          restore-keys: pages-${{ matrix.city }}-${{ steps.want.outputs.month }}-
       - name: Magicbricks project list
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
-        shell: bash
-        run: python3 mb_crawl.py list ${{ matrix.city }} 2>&1 | tee ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
-      - name: Magicbricks project pages (about 1 hour per 3,000 projects)
+        run: python3 mb_crawl.py list ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - name: Magicbricks project pages (about 1 hour per 4,000 projects)
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
-        run: python3 mb_crawl.py projects ${{ matrix.city }}
+        run: python3 mb_crawl.py projects ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
       - name: OpenStreetMap buildings, areas and nearby places
         if: steps.want.outputs.run == 'true'
+        continue-on-error: true
         working-directory: pipeline
-        run: python3 osm_fetch.py ${{ matrix.city }}
+        run: python3 osm_fetch.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - name: Save downloaded pages for reruns
+        if: always() && steps.want.outputs.run == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: pipeline/cache
+          key: pages-${{ matrix.city }}-${{ steps.want.outputs.month }}-${{ github.run_id }}
       - name: Build site data
         if: steps.want.outputs.run == 'true'
         working-directory: pipeline
-        run: python3 build_city.py ${{ matrix.city }}
-      - name: Save the error log to the debug branch
-        if: failure()
+        run: python3 build_city.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
+      - name: Save the log to the debug branch
+        if: always() && steps.want.outputs.run == 'true'
         run: |
           git config user.name "flat-finder bot"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cp crawl-${{ matrix.city }}.log /tmp/ 2>/dev/null || echo "no log" > /tmp/crawl-${{ matrix.city }}.log
-          git fetch origin debug 2>/dev/null && git checkout debug 2>/dev/null || git checkout --orphan debug
-          git rm -rfq . 2>/dev/null || true
-          tail -c 20000 /tmp/crawl-${{ matrix.city }}.log > crawl-${{ matrix.city }}.log
-          git add crawl-${{ matrix.city }}.log && git commit -qm "crawl log ${{ matrix.city }}" && git push -f origin HEAD:debug-${{ matrix.city }}
+          { grep -v "^  retry" crawl-${{ matrix.city }}.log 2>/dev/null || echo "no log"; } | tail -c 60000 > /tmp/log.txt
+          git checkout -q --orphan dbg && git rm -rfq --cached . && cp /tmp/log.txt crawl-${{ matrix.city }}.log
+          git add crawl-${{ matrix.city }}.log && git commit -qm "crawl log ${{ matrix.city }} run ${{ github.run_id }}" && git push -qf origin HEAD:debug-${{ matrix.city }}
       - uses: actions/upload-artifact@v4
         if: steps.want.outputs.run == 'true'
         with:
