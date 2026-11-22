@@ -81,7 +81,7 @@ jobs:
           git add web/public/data
           if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "Monthly data refresh $(date -u +%Y-%m-%d)"
-          git push
+          git pull --rebase origin main && git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
   deploy:
