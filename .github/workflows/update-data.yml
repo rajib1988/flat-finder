@@ -58,6 +58,7 @@ jobs:
       - name: OpenStreetMap buildings, areas and nearby places
         if: steps.want.outputs.run == 'true'
         continue-on-error: true
+        timeout-minutes: 80
         working-directory: pipeline
         run: python3 osm_fetch.py ${{ matrix.city }} 2>&1 | tee -a ../crawl-${{ matrix.city }}.log; exit ${PIPESTATUS[0]}
       - name: Save downloaded pages for reruns

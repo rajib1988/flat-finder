@@ -31,10 +31,10 @@ def overpass(query, name):
     if f.exists():
         return json.loads(f.read_text())
     body = urllib.parse.urlencode({"data": query}).encode()
-    for url in MIRRORS * 2:
+    for url in MIRRORS:
         try:
             req = urllib.request.Request(url, data=body, headers={"User-Agent": "flat-finder/0.1"})
-            raw = urllib.request.urlopen(req, timeout=300).read()
+            raw = urllib.request.urlopen(req, timeout=200).read()
             data = json.loads(raw)
             f.write_bytes(raw)
             return data
